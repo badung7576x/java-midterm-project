@@ -1,4 +1,4 @@
-package application;
+package application.controller;
 
 import java.io.IOException;
 import java.net.URL;
@@ -23,25 +23,25 @@ public class MainController implements Initializable {
 	
 	public void homePage() throws IOException {
 		System.out.println("Welcome Page");
-		AnchorPane child = FXMLLoader.load(getClass().getResource("Welcomepage.fxml"));
+		AnchorPane child = FXMLLoader.load(getClass().getResource("/application/Welcomepage.fxml"));
 		presentArea.getChildren().setAll(child);
 	}
 	
 	public void queuePage() throws IOException {
 		System.out.println("Queue Page");
-		AnchorPane child = FXMLLoader.load(getClass().getResource("Queuepage.fxml"));
+		AnchorPane child = FXMLLoader.load(getClass().getResource("/application/Queuepage.fxml"));
 		presentArea.getChildren().setAll(child);
 	}
 	
 	public void arrayListPage() throws IOException {
 		System.out.println("Array List Page");
-		AnchorPane child = FXMLLoader.load(getClass().getResource("Arraylistpage.fxml"));
+		AnchorPane child = FXMLLoader.load(getClass().getResource("/application/Arraylistpage.fxml"));
 		presentArea.getChildren().setAll(child);
 	}
 	
 	public void hashTablePage() throws IOException {
 		System.out.println("HashTable Page");
-		AnchorPane child = FXMLLoader.load(getClass().getResource("Hashtablepage.fxml"));
+		AnchorPane child = FXMLLoader.load(getClass().getResource("/application/Hashtablepage.fxml"));
 		presentArea.getChildren().setAll(child);
 	}
 
