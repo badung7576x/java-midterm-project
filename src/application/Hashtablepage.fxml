@@ -16,9 +16,8 @@
 		<AnchorPane maxHeight="600.0" maxWidth="800.0"
 			minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="800.0">
 			<children>
-<<<<<<< HEAD
 				<Label alignment="CENTER" layoutX="22.0" layoutY="10.0"
-					prefHeight="33.0" prefWidth="758.0" text="Hash Table Presentation"
+					prefHeight="33.0" prefWidth="758.0" text="Hash Table Visualization"
 					textFill="RED">
 					<font>
 						<Font name="System Bold Italic" size="30.0" />
