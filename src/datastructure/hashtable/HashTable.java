@@ -10,7 +10,6 @@ public class HashTable<Key, Value> {
 	private int numBuckets = 10;
 	private int size;
 
-
 	public HashTable() {
 		for (int i = 0; i < this.numBuckets; i++) {
 			this.bucket.add(null);
@@ -20,11 +19,10 @@ public class HashTable<Key, Value> {
 	public int getSize() {
 		return this.size;
 	}
-	
+
 	public int getNumBuckets() {
 		return numBuckets;
 	}
-
 
 	public ArrayList<HashNode<Key, Value>> getBucket() {
 		return this.bucket;
@@ -37,6 +35,7 @@ public class HashTable<Key, Value> {
 	public void clear() {
 		bucket.clear();
 	}
+
 	public Value get(Key key) {
 		int index = hF.hashFunction(key);
 		HashNode<Key, Value> head = bucket.get(index);
@@ -79,26 +78,26 @@ public class HashTable<Key, Value> {
 		}
 	}
 
-	public void add(Key key,Value value) {
-		
+	public void add(Key key, Value value) {
+
 		int index = hF.hashFunction(key);
 		HashNode<Key, Value> head = bucket.get(index);
 		HashNode<Key, Value> newNode = new HashNode<>();
 		newNode.key = key;
 		newNode.value = value;
-		if(head == null) {
+		if (head == null) {
 			bucket.set(index, newNode);
 			size++;
 		} else {
-			while(head != null) {
-				if(head.key.equals(key)) {
+			while (head != null) {
+				if (head.key.equals(key)) {
 					head.value = value;
 					size++;
 					break;
 				}
-				head=head.next;
+				head = head.next;
 			}
-			if(head==null){
+			if (head == null) {
 				head = bucket.get(index);
 				newNode.next = head;
 				bucket.set(index, newNode);

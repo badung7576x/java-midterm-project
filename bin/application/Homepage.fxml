@@ -10,7 +10,6 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-
 <SplitPane dividerPositions="0.3" maxHeight="600.0" maxWidth="1000.0" minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #dbd9d8;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.MainController">
 	<items>
 		<AnchorPane maxHeight="600.0" maxWidth="200.0" minHeight="0.0" minWidth="0.0" prefHeight="598.0" prefWidth="259.0" SplitPane.resizableWithParent="false">
