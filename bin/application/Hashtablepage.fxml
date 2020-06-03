@@ -10,7 +10,7 @@
 
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1"
 	xmlns="http://javafx.com/javafx/11.0.1"
-	fx:controller="application.HashTableController" >
+	fx:controller="application.controller.HashTableController" >
 	<children>
 		<AnchorPane maxHeight="600.0" maxWidth="800.0"
 			minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="800.0">
