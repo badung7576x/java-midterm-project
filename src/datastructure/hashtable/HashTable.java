@@ -1,16 +1,21 @@
 package datastructure.hashtable;
 
 import java.util.ArrayList;
+
 import datastructure.hashtable.HashNode;
 
 public class HashTable<Key, Value> {
 
-	ArrayList<HashNode<Key, Value>> bucket = new ArrayList<>();
-	HashFunction<Key> hF = new HashFunction<Key>();
+	private ArrayList<HashNode<Key, Value>> bucket = new ArrayList<>();
+	private HashFunction<Key> hF = new HashFunction<Key>();
 	private int numBuckets = 10;
 	private int size;
 
 	public HashTable() {
+		this.initBucket();
+	}
+	
+	private void initBucket() {
 		for (int i = 0; i < this.numBuckets; i++) {
 			this.bucket.add(null);
 		}
@@ -21,7 +26,7 @@ public class HashTable<Key, Value> {
 	}
 
 	public int getNumBuckets() {
-		return numBuckets;
+		return this.numBuckets;
 	}
 
 	public ArrayList<HashNode<Key, Value>> getBucket() {
@@ -34,46 +39,47 @@ public class HashTable<Key, Value> {
 
 	public void clear() {
 		bucket.clear();
+		this.initBucket();
+		this.size = 0;
 	}
 
 	public Value get(Key key) {
 		int index = hF.hashFunction(key);
+		if(index > bucket.size()) return null;
 		HashNode<Key, Value> head = bucket.get(index);
 
 		while (head != null) {
 			if (head.key.equals(key))
 				return head.value;
-//				return true;
 			head = head.next;
 		}
 		return null;
-//		return false;
 	}
 
 	public Value remove(Key key) {
 		int index = hF.hashFunction(key);
-		HashNode<Key, Value> head = bucket.get(index);
+		HashNode<Key, Value> head = this.bucket.get(index);
 
 		if (head == null)
 			return null;
 		if (head.key.equals(key)) {
 			Value val = head.value;
 			head = head.next;
-			bucket.set(index, head);
-			size--;
+			this.bucket.set(index, head);
+			this.size--;
 			return val;
 		} else {
 			HashNode<Key, Value> prev = null;
 			while (head != null) {
 				if (head.key.equals(key)) {
 					prev.next = head.next;
-					size--;
+					this.size--;
 					return head.value;
 				}
 				prev = head;
 				head = head.next;
 			}
-			size--;
+			this.size--;
 			return null;
 		}
 	}
@@ -81,42 +87,32 @@ public class HashTable<Key, Value> {
 	public void add(Key key, Value value) {
 
 		int index = hF.hashFunction(key);
-		HashNode<Key, Value> head = bucket.get(index);
+		
+		HashNode<Key, Value> head = this.bucket.get(index); 
 		HashNode<Key, Value> newNode = new HashNode<>();
 		newNode.key = key;
 		newNode.value = value;
 		if (head == null) {
-			bucket.set(index, newNode);
-			size++;
+			this.bucket.set(index, newNode);
+			this.size++;
 		} else {
-			while (head != null) {
-				if (head.key.equals(key)) {
-					head.value = value;
-					size++;
+			HashNode<Key, Value> tmpHashNode = head;
+			while (tmpHashNode != null) {
+				if (tmpHashNode.key.equals(key)) {
+					tmpHashNode.value = value;
 					break;
 				}
-				head = head.next;
+				tmpHashNode = tmpHashNode.next;
 			}
-			if (head == null) {
-				head = bucket.get(index);
-				newNode.next = head;
-				bucket.set(index, newNode);
-				size++;
+			if (tmpHashNode == null) {
+				tmpHashNode = head;
+				while (tmpHashNode.next != null) {
+					tmpHashNode = tmpHashNode.next;
+				}
+				tmpHashNode.next = newNode;
+				this.size++;
 			}
 		}
-//		if( (1.0 * size) / numBuckets > 0.9) {
-//			ArrayList<HashNode<Key, Value>> tmp = bucket;
-//			bucket = new ArrayList<>();
-//			numBuckets = 2 * numBuckets;
-//			for(int i = 0; i < numBuckets; i++) {
-//				bucket.add(null);
-//			}
-//			for(HashNode<Key, Value> headNode : tmp) {
-//				while(headNode != null) {
-//					add(headNode.key, headNode.value);
-//					headNode=headNode.next;
-//				}
-//			}
-//		}
 	}
+
 }

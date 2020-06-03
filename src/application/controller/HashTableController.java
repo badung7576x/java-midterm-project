@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+import datastructure.hashtable.HashFunction;
 import datastructure.hashtable.HashNode;
 import datastructure.hashtable.HashTable;
 import javafx.fxml.FXML;
@@ -20,20 +22,24 @@ public class HashTableController implements Initializable {
 
 	@FXML
 	private GridPane gridpane;
-
 	@FXML
 	private TextField input;
 	@FXML
 	private TextField value;
+	
+	private final static int MAX_ROW_GP = 9;
+	private final static int MAX_COL_GP = 6;
 
 	private HashTable<String, String> hashtable = new HashTable<String, String>();
 
 	public void add() throws IOException {
 		String keyStr = input.getText();
 		String valStr = value.getText();
-		if (!keyStr.isEmpty() && !valStr.isEmpty()) {
+		if (!keyStr.isEmpty() && !valStr.isEmpty()) {   //xesx4r
+			HashFunction<String> hashFunction = new HashFunction<String>();
+			System.out.println(hashFunction.hashFunction(keyStr));
 			hashtable.add(keyStr, valStr);
-			System.out.println("The node added!");
+			System.out.println(hashtable.getSize());
 		}
 		this.clearInput();
 		this.generateHashTable();
@@ -42,15 +48,20 @@ public class HashTableController implements Initializable {
 	public void remove() throws IOException {
 		String keyStr = input.getText();
 		if (!keyStr.isEmpty()) {
-			hashtable.remove(keyStr);
-			System.out.println("The node remove!");
+			String value = hashtable.remove(keyStr);
+			if(value == null) {
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setTitle("Thông báo !");
+				alert.setHeaderText(null);
+				alert.setContentText("Hashtable không chứa giá trị bạn muốn xóa!");
+				alert.showAndWait();
+			}
 		}
 		this.clearInput();
 		this.generateHashTable();
 	}
 
 	public void clear() throws IOException {
-		System.out.println("Clear element");
 		this.clearInput();
 		hashtable.clear();
 		this.generateHashTable();
@@ -63,7 +74,8 @@ public class HashTableController implements Initializable {
 			return;
 		}
 		String value = hashtable.get(keyStr);
-		if (!keyStr.isEmpty() && !value.isEmpty()) {
+		
+		if (!keyStr.isEmpty() && value != null) {
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Thông báo !");
 			alert.setHeaderText(null);
@@ -96,7 +108,15 @@ public class HashTableController implements Initializable {
 			}
 			HashNode<String, String> iNode = xHashNode;
 			col = 1;
+			if (row > MAX_ROW_GP) {
+				System.out.println("Max size of gridpane!");
+				break;
+			}
 			while (iNode != null) {
+				if (col > MAX_COL_GP) {
+					System.out.println("Max size of gridpane!");
+					break;
+				}
 				Button xButton = new Button(iNode.key + " | " + iNode.value);
 				xButton.setStyle("-fx-background-color: #abccba;-fx-border-color:gray; -fx-border-radius: 5");
 				xButton.setPrefSize(108, 45);
@@ -105,9 +125,7 @@ public class HashTableController implements Initializable {
 				col += 1;
 			}
 			row += 1;
-
 		}
-		System.out.println("Generate hashtable!");
 	}
 
 	private void clearInput() {
