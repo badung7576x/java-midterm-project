@@ -37,18 +37,18 @@ public class HashTable<Key, Value> {
 	public void clear() {
 		bucket.clear();
 	}
-	public boolean get(Key key) {
+	public Value get(Key key) {
 		int index = hF.hashFunction(key);
 		HashNode<Key, Value> head = bucket.get(index);
 
 		while (head != null) {
 			if (head.key.equals(key))
-//				return head.value;
-				return true;
+				return head.value;
+//				return true;
 			head = head.next;
 		}
-//		return null;
-		return false;
+		return null;
+//		return false;
 	}
 
 	public Value remove(Key key) {

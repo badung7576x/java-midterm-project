@@ -27,6 +27,7 @@ public class HashFunction<Key> {
 		long pow = 1;
 		
 		String keyString = String.valueOf(key);
+		
 		for (int i = 0; i < keyString.length(); i++) {
 			hashCode = hashCode + (int) keyString.charAt(i) * pow;
 			pow = pow * 31;
