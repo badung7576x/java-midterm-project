@@ -76,13 +76,19 @@ public class ControllerArrayList implements Initializable {
 		String index = indexInsert.getText();
 		String value = valueInsert.getText();
 
-		if (index.isEmpty() || value.isEmpty())
+		if (index.isEmpty() ) {
+			if(value.isEmpty())
+				JOptionPane.showMessageDialog(null, "Please input a index and value !");
+			else JOptionPane.showMessageDialog(null, "Please input a index !");
+		}
+		else if(value.isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Please input a value !");
+		}
 		else {
 			if (tryParse(index) == null)
 				JOptionPane.showMessageDialog(null, "Please input a valid index!");
 			else {
-				if (tryParse(index) > list.size())
+				if (tryParse(index) > list.size() || tryParse(index)<0)
 					JOptionPane.showMessageDialog(null, "Wrong index!");
 				else {
 					indexInsert.clear();
