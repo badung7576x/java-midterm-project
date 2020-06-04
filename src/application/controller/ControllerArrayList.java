@@ -102,11 +102,11 @@ public class ControllerArrayList implements Initializable {
 			if (tryParse(index) == null)
 				JOptionPane.showMessageDialog(null, "Please input a valid index!");
 			else {
-				if (tryParse(index) > list.size() || tryParse(index) < 0)
+				int id = tryParse(index);
+				if (id > list.size() || id < 0)
 					JOptionPane.showMessageDialog(null, "Wrong index!");
 				else {
 					indexDelete.clear();
-					int id = tryParse(index);
 					list.remove(id);
 					grid.getChildren().clear();
 					printList();
