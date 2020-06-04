@@ -102,8 +102,9 @@ public class ControllerArrayList implements Initializable {
 			if (tryParse(index) == null)
 				JOptionPane.showMessageDialog(null, "Please input a valid index!");
 			else {
+				System.out.println(list.size());
 				int id = tryParse(index);
-				if (id > list.size() || id < 0)
+				if (id >= list.size() || id < 0)
 					JOptionPane.showMessageDialog(null, "Wrong index!");
 				else {
 					indexDelete.clear();
