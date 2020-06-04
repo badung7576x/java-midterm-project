@@ -106,7 +106,8 @@ public class ControllerArrayList implements Initializable {
 					JOptionPane.showMessageDialog(null, "Wrong index!");
 				else {
 					indexDelete.clear();
-					list.remove(tryParse(index));
+					int id = tryParse(index);
+					list.remove(id);
 					grid.getChildren().clear();
 					printList();
 				}
